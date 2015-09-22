@@ -108,10 +108,10 @@ angular.module('schemaForm').provider('sfBuilder', ['sfPathProvider', function(s
       // but be nice to existing ng-if.
       if (args.form.condition) {
         var evalExpr = 'evalExpr(' + args.path +
-                       '.condition, { model: model, "arrayIndex": $index})';
+                       '.condition, { model: model, form: form, "arrayIndex": $index})';
         if (args.form.key) {
           var strKey = sfPathProvider.stringify(args.form.key);
-          evalExpr = 'evalExpr(' + args.path + '.condition,{ model: model, "arrayIndex": $index, ' +
+          evalExpr = 'evalExpr(' + args.path + '.condition,{ model: model, form: form, "arrayIndex": $index, ' +
                      '"modelValue": model' + (strKey[0] === '[' ? '' : '.') + strKey + '})';
         }
 
