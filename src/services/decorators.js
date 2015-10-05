@@ -273,10 +273,16 @@ angular.module('schemaForm').provider('schemaFormDecorators',
                       // No key no model, and we might have strategy 'retain'
                       if (form.key && destroyStrategy !== 'retain') {
 
-                        // Get the object that has the property we wan't to clear.
+                        // Get the object that has the property we want to clear.
                         var obj = scope.model;
                         if (form.key.length > 1) {
-                          obj = sfSelect(form.key.slice(0, form.key.length - 1), obj);
+                          var key = _.map(form.key.slice(0, form.key.length - 1), function (segment) {
+                            if (segment === '') {
+                              return scope.$index;
+                            }
+                            return segment;
+                          });
+                          obj = sfSelect(key, obj);
                         }
 
                         // We can get undefined here if the form hasn't been filled out entirely
